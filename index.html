@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="assets/img/html.png" type="image/x-icon">
+    <title>JEFFERSON LUNA</title>
+
+    <!-- ICONOS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="assets/css/global.css" />
+    <link rel="stylesheet" href="assets/css/menu.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
+
+  <body>
+    <!-- Botón hamburguesa -->
+    <button class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <img src="assets/img/img-perfil.jpeg" alt="Tu Foto" class="profile-img" />
+      <h1 class="name">Jefferson Luna</h1>
+
+      <ul class="nav-links">
+        <li>
+          <a data-page="inicio"><i class="fas fa-home"></i> Inicio</a>
+        </li>
+        <li>
+          <a data-page="sobre-mi"><i class="fas fa-user"></i> Sobre Mí</a>
+        </li>
+        <li>
+          <a data-page="proyectos"
+            ><i class="fas fa-briefcase"></i> Proyectos</a
+          >
+        </li>
+        <li>
+          <a data-page="habilidades"><i class="fas fa-code"></i> Habilidades</a>
+        </li>
+        <li>
+          <a href="https://wa.me/573002758430?text=Hola%20Jefferson,%20quiero%20contactarte" target="_blank">
+            <i class="fas fa-envelope"></i> Contacto
+          </a>
+        </li>
+    </aside>
+
+    <!-- MAIN CONTENT (AQUÍ SE CARGAN LAS SECCIONES) -->
+    <main class="main-content">
+      <div id="app-content"></div>
+    </main>
+
+    <script>
+      /* ========= MENÚ RESPONSIVE ========= */
+      const menuBtn = document.querySelector(".menu-toggle");
+      const sidebar = document.querySelector(".sidebar");
+
+      menuBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+        menuBtn.classList.toggle("active");
+
+        menuBtn.innerHTML = menuBtn.classList.contains("active")
+          ? '<i class="fas fa-times"></i>'
+          : '<i class="fas fa-bars"></i>';
+      });
+
+      /* ========= MINI SPA (HTML + CSS DINÁMICO) ========= */
+      const appContent = document.getElementById("app-content");
+
+      // Cargar CSS dinámicamente según la sección
+      function loadCSS(file) {
+        if (document.querySelector(`link[data-css="${file}"]`)) return;
+
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = `assets/css/${file}.css`;
+        link.dataset.css = file;
+        document.head.appendChild(link);
+      }
+
+      // Inicializar TagCloud
+      function initTagCloud() {
+        const entries = [
+          "HTML",
+          "CSS",
+          "JS",
+          "React",
+          "Node",
+          "Python",
+          "Git",
+          "SQL",
+        ];
+        const options = {
+          radius: 150,
+          maxSpeed: "fast",
+          initSpeed: "normal",
+          direction: 135,
+          keep: true,
+        };
+        const container = document.querySelector("#skills-cloud");
+        if (container) TagCloud("#skills-cloud", entries, options);
+      }
+
+      // Cargar una página
+      async function loadPage(page) {
+        try {
+          const res = await fetch(`pages/${page}.html`);
+          const html = await res.text();
+
+          const newPage = document.createElement("div");
+          newPage.classList.add("page-transition");
+          newPage.innerHTML = html;
+
+          appContent.innerHTML = "";
+          appContent.appendChild(newPage);
+
+          // FORZAR recálculo para animación
+          void newPage.offsetWidth;
+          newPage.classList.add("show");
+
+          // Cargar CSS dinámico
+          loadCSS(page);
+
+          // Inicializar TagCloud si estamos en "habilidades"
+          if (page === "habilidades") {
+            requestAnimationFrame(initTagCloud);
+          }
+        } catch (err) {
+          appContent.innerHTML = "<h2>Error al cargar la página</h2>";
+        }
+      }
+
+      // Cargar "inicio" por defecto
+      loadPage("inicio");
+
+      // Eventos de clic del menú
+      document.querySelectorAll(".nav-links a[data-page]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+
+          const page = link.dataset.page;
+          loadPage(page);
+
+          // cerrar menú en móvil
+          sidebar.classList.remove("active");
+          menuBtn.classList.remove("active");
+          menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        });
+      });
+    </script>
+    <script src="assets/js/TagCloud.js"></script>
+  </body>
+</html>
