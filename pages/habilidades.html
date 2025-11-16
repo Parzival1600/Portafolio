@@ -1,0 +1,56 @@
+<!-- Contenedor principal -->
+<div class="skills-section">
+
+  <!-- Bola 3D -->
+  <div id="skills-cloud" class="skills-cloud"></div>
+
+  <!-- Tarjetas de habilidades en fila -->
+  <div class="skills-row">
+    <div class="skill-card">
+      <img src="assets/img/html.png" alt="HTML">
+      <span>HTML</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/css.png" alt="CSS">
+      <span>CSS</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/js.png" alt="JS">
+      <span>JS</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/react.png" alt="React">
+      <span>REACT</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/php.png" alt="Node">
+      <span>PHP</span>
+    </div>
+    <div class="skill-card">
+        <img src="assets/img/laravel.png" alt="Git">
+        <span>LARAVEL</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/python.png" alt="Python">
+      <span>PYTHON</span>
+    </div>
+    <div class="skill-card">
+      <img src="assets/img/sql.png" alt="SQL">
+      <span>SQL</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Script de la bola 3D -->
+<script>
+  const entries = ['HTML', 'CSS', 'JS', 'REACT', 'PHP', 'LARAVEL', 'PYTHON', 'SQL'];
+  const options = {
+    radius: 150,
+    maxSpeed: 'fast',
+    initSpeed: 'normal',
+    direction: 135,
+    keep: true
+  };
+  TagCloud('#skills-cloud', entries, options);
+</script>

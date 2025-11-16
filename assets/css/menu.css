@@ -1,0 +1,84 @@
+/* =========================================
+   BOTÓN DE MENÚ (MÓVIL)
+========================================= */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+.sidebar {
+  width: 300px;
+  background: linear-gradient(180deg, var(--color-sidebar-top), var(--color-sidebar-bottom));
+  color: var(--color-text-main);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-border-light);
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-accent-light);
+  margin-bottom: 1rem;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--color-accent);
+}
+
+/* NAV LINKS */
+.nav-links {
+  list-style: none;
+  width: 100%;
+}
+
+.nav-links li {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.nav-links a {
+  color: var(--color-text-main);
+  text-decoration: none;
+  padding: 0.8rem 1rem;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  transition: var(--transition-default);
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(5px);
+}
+
+.nav-links i {
+  margin-right: 10px;
+  width: 20px;
+  text-align: center;
+  color: var(--color-accent-light);
+}

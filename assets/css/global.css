@@ -1,0 +1,52 @@
+/* =========================================
+   VARIABLES GLOBALES
+========================================= */
+:root {
+  --color-bg-dark: #0d0d0d;
+  --color-bg-dark2: #111827;
+  --color-sidebar-top: #0f0f0f;
+  --color-sidebar-bottom: #1f2937;
+
+  --color-text-main: #e5e7eb;
+  --color-text-muted: #9ca3af;
+
+  --color-accent: #f0f0f0dc;
+  --color-accent-light: #00ffff;
+
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-border-soft: rgba(255, 255, 255, 0.08);
+
+  --transition-default: 0.3s ease;
+}
+
+/* =========================================
+   RESET & BASE
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-bg-dark), var(--color-bg-dark2));
+  color: var(--color-text-main);
+}
+
+/* =========================================
+   ANIMACIÓN DE ENTRADA 
+========================================= */
+.page-transition {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+.page-transition.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
